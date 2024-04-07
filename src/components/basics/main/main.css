@@ -1,0 +1,73 @@
+.title{
+    font-style: italic;
+    color: white;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgb(60, 84, 163) ;
+    position: relative;
+    flex-direction: column;
+}
+
+.title::after{
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background:linear-gradient(45deg, rgb(123, 171, 190),white);
+    border-radius: 50%;
+    top: 25px;
+}
+.title::before{
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background:linear-gradient(45deg, rgb(123, 171, 190),white);
+    border-radius: 50%;
+    top: 5%;
+    z-index: -1;
+}
+
+.add-to-cart{
+    background-color: lightgreen;
+    border-radius:10%;
+    cursor: pointer;
+}
+
+.notify{
+    background-color: lightgray;
+    border-radius:10%;
+    cursor: pointer;
+}
+.table{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 10%;
+}
+
+.btn{
+    width: 200px;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.card-footer{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.title-container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+
