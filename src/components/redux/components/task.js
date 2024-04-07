@@ -1,18 +1,47 @@
 import React from 'react';
-import "./tasks.css";
+import "./task.css";
 import Collapsible from "./collapsible";
 import { useState } from "react";
+import { useSelector ,useDispatch} from "react-redux";
+ import {createTask,deleteTask} from '../actions/tasks';
+
+//either import store directly (but will not re-render on every change) hence use useSelector
 
 function Tasks() {
+  let tasks = useSelector(state=>state.tasks);
   let [ isNewTaskOpen, setIsNewTaskOpen ] = useState(false);
+  let [tasksTitle , setTaskTitle]= useState("");
+  let [tasksTitleTime , settasksTitleTime]= useState("");
+  let [ search, setSearch ] = useState("");
+
+
+  let dispatch = useDispatch();
+  console.log(tasks);
+  let filtered = tasks.filter(task=>task.titleName.toLowerCase().indexOf(search.toLowerCase())>=0);
 
   let onSaveClick = () => {
+    dispatch(createTask({
+      id:Math.floor(Math.random()*100000),
+      titleName:tasksTitle,
+      taskDateTime:tasksTitleTime
+    }
+     
+    ))
+    settasksTitleTime("");
+    setTaskTitle("");
     setIsNewTaskOpen(!isNewTaskOpen);
   };
 
   let onCancelClick = () => {
     setIsNewTaskOpen(!isNewTaskOpen);
+    
   };
+
+  let deleteTask =(task)=>{
+      dispatch(deleteTask(task));
+  }
+
+
 
   return (
     <div className="outer-container">
@@ -39,7 +68,7 @@ function Tasks() {
             <div className="form-group">
               <label className="form-label" htmlFor="task-title">Task Title:</label>
               <div className="form-input">
-                <input type="text" placeholder="Task Title" className="text-box" id="task-title" />
+                <input type="text" placeholder="Task Title" className="text-box" id="task-title" value={tasksTitle}  onChange={(e)=>{setTaskTitle(e.target.value)}}/>
               </div>
               
             </div>
@@ -49,7 +78,7 @@ function Tasks() {
             <div className="form-group">
               <label className="form-label" htmlFor="task-date-time">Task Date and Time:</label>
               <div className="form-input">
-                <input type="datetime-local" placeholder="Task Date and Time" className="text-box" id="task-date-time" />
+                <input type="datetime-local" placeholder="Task Date and Time" className="text-box" id="task-date-time" value={tasksTitleTime}  onChange={(e)=>{settasksTitleTime(e.target.value)}} />
               </div>
             </div>
             {/* form group ends */}
@@ -69,21 +98,20 @@ function Tasks() {
         </Collapsible>
 
         <div className="search-box">
-          <input type="search" placeholder="Search" />
+          <input type="search" placeholder="Search" value={search} onChange={(e)=>setSearch(e.target.value)} />
           <i className="fa fa-search"></i>
         </div>
 
         <div className="content-body">
-
-          {/* task starts */}
-          <div className="task">
+          {filtered.map(task=>
+          <div className="task" key={task.id}>
             <div className="task-body">
               <div className="task-title">
                 <i className="fa fa-thumbtack"></i>
-                <span className="task-title-text">Bob's Appointment</span>
+                <span className="task-title-text">{task.titleName}</span>
               </div>
               <div className="task-subtitle">
-                <i className="far fa-clock"></i> <span className="task-subtitle-text">Jul 16th at 9:30am</span>
+                <i className="far fa-clock"></i> <span className="task-subtitle-text">{task.taskDateTime}</span>
               </div>
             </div>
 
@@ -91,25 +119,8 @@ function Tasks() {
               <button className="icon-button" title="Delete">&times;</button>
             </div>
           </div>
-          {/* task ends */}
+      )}
 
-          {/* task starts */}
-          <div className="task">
-            <div className="task-body">
-              <div className="task-title">
-                <i className="fa fa-thumbtack"></i>
-                <span className="task-title-text">Project Presentation</span>
-              </div>
-              <div className="task-subtitle">
-                <i className="far fa-clock"></i> <span className="task-subtitle-text">Jul 17th at 11:15am</span>
-              </div>
-            </div>
-
-            <div className="task-options">
-              <button className="icon-button" title="Delete">&times;</button>
-            </div>
-          </div>
-          {/* task ends */}
         </div>
       </div>
     </div>
