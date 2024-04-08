@@ -1,4 +1,4 @@
 import React from 'react';
-import {createTask,deleteTask} from './tasks';
-var actions = {createTask, deleteTask};
+import {createTask,deleteTask,fetchTasksAsync} from './tasks';
+var actions = {createTask, deleteTask, fetchTasksAsync};
 export default actions;

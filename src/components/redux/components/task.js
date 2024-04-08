@@ -1,9 +1,9 @@
 import React from 'react';
 import "./task.css";
 import Collapsible from "./collapsible";
-import { useState } from "react";
+import { useState ,useEffect } from "react";
 import { useSelector ,useDispatch} from "react-redux";
- import {createTask,deleteTask} from '../actions/tasks';
+ import {createTask,deleteTask , fetchTasksAsync} from '../actions/tasks';
 
 //either import store directly (but will not re-render on every change) hence use useSelector
 
@@ -14,6 +14,9 @@ function Tasks() {
   let [tasksTitleTime , settasksTitleTime]= useState("");
   let [ search, setSearch ] = useState("");
 
+  useEffect(()=>{
+    dispatch(fetchTasksAsync);
+  })
 
   let dispatch = useDispatch();
   console.log(tasks);
@@ -40,8 +43,6 @@ function Tasks() {
   let deleteTask =(task)=>{
       dispatch(deleteTask(task));
   }
-
-
 
   return (
     <div className="outer-container">
