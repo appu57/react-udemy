@@ -2,8 +2,8 @@ import React from 'react';
 export const CREATE_TASK ="create_task";
 export const DELETE_TASK = "delete_task";export const FETCH_TASK = "fetch_task";
 
-export const fetchTasksAsync= () =>{
-    return (dispatch,getState)=>{
+export const fetchTasksAsync = ()=>(dispatch,getState) =>{
+    // return (dispatch,getState)=>{
     var promise = fetch("http://localhost:3000/tasks",{method:"GET"}); //return list of tasks added before 
      promise.then((response)=>{
         console.log(response);
@@ -15,7 +15,7 @@ export const fetchTasksAsync= () =>{
             })
         })
      })
-    }
+    // }
 
     // var response = await fetch("http://localhost:3000/tasks",{method:"GET"}); //return list of tasks added before 
     // var promise2 = await response.json();

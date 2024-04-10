@@ -129,3 +129,5 @@ function Tasks() {
 }
 
 export default Tasks;
+
+//Instead of dispatch we can use connect that came before hooks connect()(Tasks) which sends (props ) to Tasks functio which has props.dispatch and use mapStatetoProps to send state/actionTypes instead of selector connect(mapStatetoProps,mapDispatchToProps)(Tasks)
