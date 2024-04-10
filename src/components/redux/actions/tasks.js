@@ -10,7 +10,7 @@ export const fetchTasksAsync = ()=>(dispatch,getState) =>{
         var promise2 = response.json();
         promise2.then((res)=>{
             dispatch({
-                type:actionTypes.FETCH_TASK,
+                type:FETCH_TASK,
                 payload:res
             })
         })
